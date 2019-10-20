@@ -3,9 +3,12 @@ var socket = require("socket.io");
 
 var app = express();
 var PORT = 5000;
-server = app.listen(PORT, function() {
-  console.log(`server is running on port ${PORT}`);
-});
+const server = express()
+  .use((req, res) => res.sendFile(INDEX))
+  .listen(PORT, () => console.log(`Listening on ${PORT}`));
+// server = app.listen(PORT, function() {
+//   console.log(`server is running on port ${PORT}`);
+// });
 
 var rooms = ["general", "room1", "room2"];
 var usernames = [];
@@ -20,7 +23,7 @@ app.use(function(req, res, next) {
   next();
 });
 
-io = socket(server);
+const io = socket(server);
 io.set("origins", "*localhost:3000");
 
 io.on("connection", socket => {
