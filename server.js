@@ -1,44 +1,17 @@
 var express = require("express");
 var socket = require("socket.io");
-var cors = require("cors");
-const path = require("path");
 
-const PORT = process.env.PORT || 5000;
-const INDEX = path.join(__dirname, "index.html");
-
-var server = express()
-  .use((req, res) => res.sendFile(INDEX))
-  .listen(PORT, () => console.log(`Listening on ${PORT}`));
-
-// var PORT = 5000;
-// server = app.listen(PORT, function() {
-//   console.log(`server is running on port ${PORT}`);
-// });
-
-// server.use(cors());rs
-
-// server.use(function(req, res, next) {
-//   res.header("Access-Control-Allow-Origin", "*");
-//   res.header("Access-Control-Allow-Credentials", true);
-//   res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
-//   res.header(
-//     "Access-Control-Allow-Headers",
-//     "Origin,X-Requested-With,Content-Type,Accept,content-type,application/json"
-//   );
-//   next();
-// });
+var app = express();
+var PORT = 5000;
+server = app.listen(PORT, function() {
+  console.log(`server is running on port ${PORT}`);
+});
 
 var rooms = ["general", "room1", "room2"];
 var usernames = [];
 
 io = socket(server);
-
-io.set("origins", "*:*");
-
-// io.configure(function() {
-//   io.set("transports", ["xhr-polling"]);
-//   io.set("polling duration", 10);
-// });
+io.origins("*:*");
 
 io.on("connection", socket => {
   console.log(`connected user with id: ${socket.id}`);
