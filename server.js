@@ -21,7 +21,7 @@ app.use(function(req, res, next) {
 });
 
 io = socket(server);
-io.origins("*:*");
+io.set("origins", "*localhost:3000");
 
 io.on("connection", socket => {
   console.log(`connected user with id: ${socket.id}`);
