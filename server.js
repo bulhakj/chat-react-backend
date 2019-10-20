@@ -10,6 +10,16 @@ server = app.listen(PORT, function() {
 var rooms = ["general", "room1", "room2"];
 var usernames = [];
 
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept-Type"
+  );
+  res.header("Access-Control-Allow-Credentials", "true");
+  next();
+});
+
 io = socket(server);
 io.origins("*:*");
 
