@@ -15,8 +15,9 @@ var server = express()
 //   console.log(`server is running on port ${PORT}`);
 // });
 
-// server.use(cors());
-// app.use(function(req, res, next) {
+// server.use(cors());rs
+
+// server.use(function(req, res, next) {
 //   res.header("Access-Control-Allow-Origin", "*");
 //   res.header("Access-Control-Allow-Credentials", true);
 //   res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
@@ -31,6 +32,8 @@ var rooms = ["general", "room1", "room2"];
 var usernames = [];
 
 io = socket(server);
+
+io.set("origins", "*:*");
 
 // io.configure(function() {
 //   io.set("transports", ["xhr-polling"]);
