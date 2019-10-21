@@ -1,11 +1,20 @@
+var http = require("http");
 var express = require("express");
-var socket = require("socket.io");
-
 var app = express();
+var server = http.createServer(app);
+var socket = require("socket.io");
+var cors = require("cors");
+
+// var app = express();
 var PORT = 5000;
-const server = express()
-  .use((req, res) => res.sendFile(INDEX))
-  .listen(PORT, () => console.log(`Listening on ${PORT}`));
+// var server = express();
+app.use((req, res) => res.sendFile(INDEX));
+app.listen(PORT, () => console.log(`Listening on ${PORT}`));
+app.use(
+  cors({
+    origin: "https://localhost:3000"
+  })
+);
 // server = app.listen(PORT, function() {
 //   console.log(`server is running on port ${PORT}`);
 // });
@@ -13,17 +22,19 @@ const server = express()
 var rooms = ["general", "room1", "room2"];
 var usernames = [];
 
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept-Type"
-  );
-  res.header("Access-Control-Allow-Credentials", "true");
-  next();
-});
+// app.use(function(req, res, next) {
+//   res.header("Access-Control-Allow-Origin", "*");
+//   res.header(
+//     "Access-Control-Allow-Headers",
+//     "Origin, X-Requested-With, Content-Type, Accept-Type"
+//   );
+//   res.header("Access-Control-Allow-Credentials", "true");
+//   next();
+// });
 
-const io = socket(server);
+// const io = socket(server);
+var io = require("socket.io")(server);
+// server.listen(PORT);
 io.set("origins", "*localhost:3000");
 
 io.on("connection", socket => {
