@@ -1,20 +1,24 @@
 var http = require("http");
 var express = require("express");
 var app = express();
-var server = http.createServer(app);
+var server = http.Server(app);
 var socket = require("socket.io");
 var cors = require("cors");
-
+// var io = socket(server);
+var io = (module.exports.io = require("socket.io")(server));
 // var app = express();
 var PORT = 5000;
 // var server = express();
-app.use((req, res) => res.sendFile(INDEX));
-app.listen(PORT, () => console.log(`Listening on ${PORT}`));
-app.use(
-  cors({
-    origin: "https://localhost:3000"
-  })
-);
+// server.use((req, res) => res.sendFile(INDEX));
+server.listen(PORT, () => console.log("Listening on: ", PORT));
+// server.use(
+//   cors({
+//     origin: "https://localhost:3000"
+//   })
+// );
+// server.get("/", function(req, res) {
+//   res.sendfile(__dirname + "/index.html");
+// });
 // server = app.listen(PORT, function() {
 //   console.log(`server is running on port ${PORT}`);
 // });
@@ -22,8 +26,8 @@ app.use(
 var rooms = ["general", "room1", "room2"];
 var usernames = [];
 
-// app.use(function(req, res, next) {
-//   res.header("Access-Control-Allow-Origin", "*");
+// server.use(function(req, res, next) {
+//   res.header("Access-Control-Allow-Origin", "https://localhost:3000");
 //   res.header(
 //     "Access-Control-Allow-Headers",
 //     "Origin, X-Requested-With, Content-Type, Accept-Type"
@@ -33,9 +37,10 @@ var usernames = [];
 // });
 
 // const io = socket(server);
-var io = require("socket.io")(server);
+// var io = require("socket.io")(server);
+// app.listen(PORT);
 // server.listen(PORT);
-io.set("origins", "*localhost:3000");
+// io.set("origins", "localhost:3000");
 
 io.on("connection", socket => {
   console.log(`connected user with id: ${socket.id}`);
