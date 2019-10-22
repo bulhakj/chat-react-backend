@@ -8,14 +8,14 @@ var cors = require("cors");
 var io = (module.exports.io = require("socket.io")(server));
 // var app = express();
 var PORT = 5000;
+app.use(
+  cors({
+    origin: "https://localhost:3000"
+  })
+);
 // var server = express();
 // server.use((req, res) => res.sendFile(INDEX));
 server.listen(PORT, () => console.log("Listening on: ", PORT));
-// server.use(
-//   cors({
-//     origin: "https://localhost:3000"
-//   })
-// );
 // server.get("/", function(req, res) {
 //   res.sendfile(__dirname + "/index.html");
 // });
