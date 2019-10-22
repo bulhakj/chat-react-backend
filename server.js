@@ -13,6 +13,7 @@ app.use(
     origin: "http://localhost:3000"
   })
 );
+app.use("/", express.static(path.join(__dirname, "testheroku")));
 // var server = express();
 // server.use((req, res) => res.sendFile(INDEX));
 server.listen(PORT, () => console.log("Listening on: ", PORT));
