@@ -11,6 +11,16 @@ io.set("origins", "http://localhost:3000");
 // io.set("transports", ["xhr-polling"]);
 io.set("polling duration", 10);
 var PORT = 5000;
+app.use(function(req, res, next) {
+  const origin = req.get("origin");
+  res.header("Access-Control-Allow-Origin", origin);
+  res.header("Access-Control-Allow-Credentials", true);
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept, Authorization, Cache-Control, Pragma"
+  );
+});
 app.use(
   cors({
     origin: "http://localhost:3000"
