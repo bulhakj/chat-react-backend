@@ -7,7 +7,7 @@ var cors = require("cors");
 // var io = socket(server);
 var io = require("socket.io").listen(server);
 // var app = express();
-var PORT = 5000;
+var PORT = 30;
 app.use(
   cors({
     origin: "http://localhost:3000"
