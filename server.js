@@ -1,7 +1,6 @@
 var http = require("http");
 var express = require("express");
 var app = express();
-var server = http.Server(app);
 var socket = require("socket.io");
 var cors = require("cors");
 // var io = socket(server);
@@ -26,6 +25,7 @@ app.use(
     origin: "http://localhost:3000"
   })
 );
+var server = http.Server(app);
 // var server = express();
 // server.use((req, res) => res.sendFile(INDEX));
 server.listen(PORT, () => console.log("Listening on: ", PORT));
