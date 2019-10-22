@@ -8,6 +8,8 @@ var cors = require("cors");
 var io = (module.exports.io = require("socket.io")(server));
 io.set("origins", "http://localhost:3000");
 // var app = express();
+// io.set("transports", ["xhr-polling"]);
+io.set("polling duration", 10);
 var PORT = 5000;
 app.use(
   cors({
