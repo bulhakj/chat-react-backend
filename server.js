@@ -1,31 +1,18 @@
 var http = require("http");
 var express = require("express");
 var app = express();
+var server = http.Server(app);
 var socket = require("socket.io");
 var cors = require("cors");
 // var io = socket(server);
 var io = (module.exports.io = require("socket.io")(server));
-io.set("origins", "http://localhost:3000");
 // var app = express();
-// io.set("transports", ["xhr-polling"]);
-io.set("polling duration", 10);
 var PORT = 5000;
-app.use(function(req, res, next) {
-  const origin = req.get("/");
-  res.header("Access-Control-Allow-Origin", origin);
-  res.header("Access-Control-Allow-Credentials", true);
-  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept, Authorization, Cache-Control, Pragma"
-  );
-});
 app.use(
   cors({
     origin: "http://localhost:3000"
   })
 );
-var server = http.Server(app);
 // var server = express();
 // server.use((req, res) => res.sendFile(INDEX));
 server.listen(PORT, () => console.log("Listening on: ", PORT));
