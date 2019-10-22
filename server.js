@@ -1,11 +1,11 @@
 var http = require("http");
 var express = require("express");
 var app = express();
-var server = http.Server(app);
+var server = app.listen(5000);
 var socket = require("socket.io");
 var cors = require("cors");
 // var io = socket(server);
-var io = (module.exports.io = require("socket.io")(server));
+var io = require("socket.io").listen(server);
 // var app = express();
 var PORT = 5000;
 app.use(
@@ -13,10 +13,9 @@ app.use(
     origin: "http://localhost:3000"
   })
 );
-app.use("/", express.static(path.join(__dirname, "")));
 // var server = express();
 // server.use((req, res) => res.sendFile(INDEX));
-server.listen(PORT, () => console.log("Listening on: ", PORT));
+// server.listen(PORT, () => console.log("Listening on: ", PORT));
 // server.get("/", function(req, res) {
 //   res.sendfile(__dirname + "/index.html");
 // });
