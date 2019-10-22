@@ -10,7 +10,7 @@ var io = (module.exports.io = require("socket.io")(server));
 var PORT = 5000;
 app.use(
   cors({
-    origin: "*"
+    origin: "http://localhost:3000"
   })
 );
 // var server = express();
