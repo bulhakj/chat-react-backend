@@ -6,6 +6,7 @@ var socket = require("socket.io");
 var cors = require("cors");
 // var io = socket(server);
 var io = (module.exports.io = require("socket.io")(server));
+io.set("origins", "http://localhost:3000");
 // var app = express();
 var PORT = 5000;
 app.use(
