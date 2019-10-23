@@ -1,13 +1,17 @@
 var http = require("http");
+var dotenv = require("dotenv");
 var express = require("express");
 var app = express();
-var server = app.listen(process.env.PORT || 443);
+
+dotenv.config();
+
+var server = app.listen(
+  process.env.PORT,
+  console.log("Server is listening on port: ", process.env.PORT)
+);
 var socket = require("socket.io");
 var cors = require("cors");
-// var io = socket(server);
 var io = require("socket.io").listen(server);
-// var app = express();
-var PORT = 443;
 app.use(cors());
 // var server = express();
 // server.use((req, res) => res.sendFile(INDEX));
