@@ -4,10 +4,10 @@ var express = require("express");
 var app = express();
 
 dotenv.config();
-
+var port = 443;
 var server = app.listen(
-  process.env.PORT,
-  console.log("Server is listening on port: ", process.env.PORT)
+  port,
+  console.log("Server is listening on port: port ")
 );
 var socket = require("socket.io");
 var cors = require("cors");
